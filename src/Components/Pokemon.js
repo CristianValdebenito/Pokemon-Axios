@@ -5,18 +5,19 @@ const Pokemon = (props) => {
 
     const onSubmit = (e) =>{
         e.preventDefault(); 
-        //fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=40')
+       console.log("hola")
+    }
+ 
+    useEffect(() => {
+         //fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=40')
             //.then(response => response.json())
             //.then(response => setPokemones(response.results)).catch(error=>console.log(error,"errorr"))
             axios.get('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=807')
             //La respuesta de axios es diferente, por que trae una estructura diferente de onjetos (por eso se agrega el .data)
             .then(response => setPokemones(response.data.results)).catch(error=>console.log(error,"errorr"))
             //setPokemones(response.results)?offset=20&limit=40
-    }
- 
-    useEffect(() => {
         console.log(pokemones, "pokemones desde useEffect")
-    }, [pokemones]);
+    }, []);
  //console.log(pokemones, "pokemones")hhhhhhhhh
     return (
         <div>
