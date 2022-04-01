@@ -6,9 +6,32 @@ import { useParams } from 'react-router-dom';
 const Personaje = () => {
     console.log(useParams())
     const {id} = useParams()
-    console.log(id)
+    console.log(id,"recursoooo")
     const [personaje, setPersonaje] = useState([]);
     useEffect(() => {
+        //fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=40')
+           //.then(response => response.json())
+           //.then(response => setPokemones(response.results)).catch(error=>console.log(error,"errorr"))
+           axios.get(`https://swapi.dev/api/${id}`)
+           //La respuesta de axios es diferente, por que trae una estructura diferente de onjetos (por eso se agrega el .data)
+           .then(response => setPersonaje(response.data.results)).catch(error=>console.log(error,"errorr"))
+           //setPokemones(response.results)?offset=20&limit=40
+       console.log(personaje, "recurso seleccionado")
+   }, []);
+   //let pe = Object.keys(personaje)
+   //console.log(pe, "recursooo")
+    return (
+        <div>
+            <h3>{personaje.name}</h3>
+        </div>
+    );
+}
+
+export default Personaje;
+
+
+/*
+useEffect(() => {
         //fetch('https://pokeapi.co/api/v2/pokemon/?offset=20&limit=40')
            //.then(response => response.json())
            //.then(response => setPokemones(response.results)).catch(error=>console.log(error,"errorr"))
@@ -18,12 +41,4 @@ const Personaje = () => {
            //setPokemones(response.results)?offset=20&limit=40
        console.log(personaje, "personajes desde useEffect")
    }, []);
-    
-    return (
-        <div>
-            <h3>{personaje.name}</h3>
-        </div>
-    );
-}
-
-export default Personaje;
+   */
